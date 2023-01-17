@@ -9,8 +9,7 @@ const tasksRoutes = Router();
 
 tasksRoutes.use(logMiddleware);
 
-// GET http://localhost:3333/tasks/ (com query description e detail)
-// Listar todas tasks filtrando por description e detail
+// Faz a listagem e o filtragem  dos recados pelos descrições e detalhes utilizando query. http://localhost:3333/tasks/
 tasksRoutes.get("/", (req: Request, res: Response) => {
   try {
     const { description, detail, name } = req.headers;
@@ -65,8 +64,7 @@ tasksRoutes.get("/:id", (req, res) => {
   }
 });
 
-// POST http://localhost:3333/tasks
-// Passa-se os arâmetros dire=> body
+// Passa-se os arâmetros diretamente para o corpo. http://localhost:3333/tasks
 tasksRoutes.post("/", (req: Request, res: Response) => {
   try {
     const { description, detail, name } = req.body;
@@ -101,8 +99,7 @@ tasksRoutes.post("/", (req: Request, res: Response) => {
   }
 });
 
-// DELETE http://localhost:3333/tasks/id
-// Route param
+// Abaixo os parametros de rota. http://localhost:3333/tasks/id
 tasksRoutes.delete("/:id", (req, res) => {
   try {
     const { id } = req.params;
@@ -132,9 +129,7 @@ tasksRoutes.delete("/:id", (req, res) => {
   }
 });
 
-// PUT http://localhost:3333/tasks/id
-// id => route param
-// dados alteracao => body
+// Os dados alterados passam diretamente para o corpo. O id diretamente para os parametros de rota. http://localhost:3333/tasks/id
 tasksRoutes.put("/:id", (req, res) => {
   try {
     const { id } = req.params;

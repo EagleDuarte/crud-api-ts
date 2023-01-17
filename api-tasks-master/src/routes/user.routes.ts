@@ -10,8 +10,7 @@ const userRoutes = Router();
 
 userRoutes.use(logMiddleware);
 
-// GET http://localhost:3333/tasks/ (com query description e detail)
-// Listar todas tasks filtrando por description e detail
+// Faz a listagem e o filtro dos recados pela descrição e detalhe utilizando query. http://localhost:3333/tasks/
 userRoutes.get("/", (req: Request, res: Response) => {
   try {
     const { name, userId, tasks } = req.query;
@@ -38,8 +37,7 @@ userRoutes.get("/", (req: Request, res: Response) => {
   }
 });
 
-// POST http://localhost:3333/user
-// Parâmetros => body
+// Passa-se os parametros diretamente para o corpo. http://localhost:3333/user
 userRoutes.post("/", (req: Request, res: Response) => {
   try {
     const { name, pass, Rpass } = req.body;
@@ -74,20 +72,10 @@ userRoutes.post("/", (req: Request, res: Response) => {
   }
 });
 
-// POST http://localhost:3333/user
-// Parâmetros => body
+// Passa-se os parametros diretamente para o corpo. http://localhost:3333/user
 userRoutes.post("/login", (req: Request, res: Response) => {
   try {
     const { name, pass } = req.body;
-
-    // const controller = new UserController();
-
-    // const result = controller.list(
-    //   name as string,
-    //   userId as string,
-    //   tasks as []
-    // );
-
     if (!name) {
       return res.status(400).send({
         ok: false,
@@ -107,10 +95,6 @@ userRoutes.post("/login", (req: Request, res: Response) => {
         return user;
       }
     });
-    // const tasks = tasksList.filter((tasks) => {
-    //   if (tasks.name === name) return tasks;
-    // });
-
     if (user) {
       return res.status(201).send({
         ok: true,

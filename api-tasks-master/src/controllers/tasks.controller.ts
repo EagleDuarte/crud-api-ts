@@ -34,19 +34,6 @@ export class TasksController {
     return tasksList;
   }
 
-  // public createTasks(req: Request, res: Response) {
-  //   const { description, detail } = req.body;
-  //   const { id } = req.params;
-
-  //   const tasks = tasksList.find((task) => task.id === id);
-
-  //   if (!tasks) {
-  //     return res.status(404).json({ message: "Task não encontrado!" });
-  //   }
-  //   tasksList.push(tasks);
-  //   return tasksList;
-  // }
-
   public create(description: string, detail: string, name: string) {
     const task = new Tasks(description, detail, name);
     tasksList.push(task);
