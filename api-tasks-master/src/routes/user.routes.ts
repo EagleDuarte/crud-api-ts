@@ -2,13 +2,13 @@ import { Request, Response, Router } from "express";
 import { v4 as createUuid } from "uuid";
 import { TasksController } from "../controllers/tasks.controller";
 import { UserController } from "../controllers/user.controller";
-import { tasksList, userList } from "../data/tasksList";
+import { tasksField, usersField } from "../data/tasksField";
 
-import { logMiddleware } from "../middlewares/log.middleware";
+import { loggedMiddleware } from "../middlewares/logged.middleware";
 
 const userRoutes = Router();
 
-userRoutes.use(logMiddleware);
+userRoutes.use(loggedMiddleware);
 
 // Faz a listagem e o filtro dos recados pela descrição e detalhe utilizando query. http://localhost:3333/tasks/
 userRoutes.get("/", (req: Request, res: Response) => {
@@ -61,7 +61,7 @@ userRoutes.post("/", (req: Request, res: Response) => {
     return res.status(201).send({
       ok: true,
       message: "Successfully",
-      data: userList,
+      data: usersField,
     });
   } catch (error: any) {
     return res.status(500).send({
@@ -90,7 +90,7 @@ userRoutes.post("/login", (req: Request, res: Response) => {
       });
     }
 
-    const user = userList.find((user) => {
+    const user = usersField.find((user) => {
       if (user.name === name && user.pass === pass) {
         return user;
       }

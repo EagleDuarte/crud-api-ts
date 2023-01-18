@@ -1,15 +1,15 @@
 import { Request, Response, Router } from "express";
 
 import { TasksController } from "../controllers/tasks.controller";
-import { tasksList } from "../data/tasksList";
+import { tasksField } from "../data/tasksField";
 
-import { logMiddleware } from "../middlewares/log.middleware";
+import { loggedMiddleware } from "../middlewares/logged.middleware";
 
 const tasksRoutes = Router();
 
-tasksRoutes.use(logMiddleware);
+tasksRoutes.use(loggedMiddleware);
 
-// Faz a listagem e o filtragem  dos recados pelos descrições e detalhes utilizando query. http://localhost:3333/tasks/
+// Faz a listagem e o filtragem dos recados pelos descrições e detalhes utilizando query. http://localhost:3333/tasks/
 tasksRoutes.get("/", (req: Request, res: Response) => {
   try {
     const { description, detail, name } = req.headers;
@@ -41,7 +41,7 @@ tasksRoutes.get("/", (req: Request, res: Response) => {
 tasksRoutes.get("/:id", (req, res) => {
   try {
     const { id } = req.params;
-    let tasks = tasksList.find((item) => item.id === id);
+    let tasks = tasksField.find((item) => item.id === id);
 
     if (!tasks) {
       return res.status(404).send({
@@ -64,7 +64,7 @@ tasksRoutes.get("/:id", (req, res) => {
   }
 });
 
-// Passa-se os arâmetros diretamente para o corpo. http://localhost:3333/tasks
+// Passa-se os parâmetros diretamente para o corpo. http://localhost:3333/tasks
 tasksRoutes.post("/", (req: Request, res: Response) => {
   try {
     const { description, detail, name } = req.body;
@@ -88,7 +88,7 @@ tasksRoutes.post("/", (req: Request, res: Response) => {
     return res.status(201).send({
       ok: true,
       message: "Tasks successfully created",
-      data: tasksList,
+      data: tasksField,
     });
   } catch (error: any) {
     return res.status(500).send({
@@ -104,7 +104,7 @@ tasksRoutes.delete("/:id", (req, res) => {
   try {
     const { id } = req.params;
 
-    let tasksIndex = tasksList.findIndex((item) => item.id === id);
+    let tasksIndex = tasksField.findIndex((item) => item.id === id);
 
     if (tasksIndex < 0) {
       return res.status(404).send({
@@ -113,12 +113,12 @@ tasksRoutes.delete("/:id", (req, res) => {
       });
     }
 
-    tasksList.splice(tasksIndex, 1);
+    tasksField.splice(tasksIndex, 1);
 
     return res.status(200).send({
       ok: true,
       message: "Tasks successfully deleted",
-      data: tasksList,
+      data: tasksField,
     });
   } catch (error: any) {
     return res.status(500).send({

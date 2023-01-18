@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
-import { tasksList } from "../data/tasksList";
+import { tasksField } from "../data/tasksField";
 import { Tasks } from "../models/tasks";
 
 export class TasksController {
   public list(description: string, detail: string) {
-    let lista = tasksList;
+    let lista = tasksField;
 
     if (description) {
-      lista = tasksList.filter((item) => item.description === description);
+      lista = tasksField.filter((item) => item.description === description);
     }
 
     if (detail) {
-      lista = tasksList.filter((item) => item.detail == detail);
+      lista = tasksField.filter((item) => item.detail == detail);
     }
 
     let listaRetorno = lista.map((tasks) => {
@@ -22,7 +22,7 @@ export class TasksController {
   }
 
   public update(id: string, description: string, detail: string) {
-    const tasks = tasksList.find((item) => item.id === id);
+    const tasks = tasksField.find((item) => item.id === id);
 
     if (!tasks) {
       return undefined;
@@ -31,12 +31,12 @@ export class TasksController {
     tasks.description = description;
     tasks.detail = detail;
 
-    return tasksList;
+    return tasksField;
   }
 
   public create(description: string, detail: string, name: string) {
     const task = new Tasks(description, detail, name);
-    tasksList.push(task);
-    return tasksList;
+    tasksField.push(task);
+    return tasksField;
   }
 }

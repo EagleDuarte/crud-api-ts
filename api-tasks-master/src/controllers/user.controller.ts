@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { userList } from "../data/tasksList";
+import { usersField } from "../data/tasksField";
 import { User } from "../models/user";
 import { Tasks } from "../models/tasks";
 
 export class UserController {
   public list(name: string, userId: string, tasks: []) {
-    let lista = userList;
+    let lista = usersField;
 
     if (name) {
-      lista = userList.filter((item) => item.name === name);
+      lista = usersField.filter((item) => item.name === name);
     }
 
     let listaRetorno = lista.map((tasks) => {
@@ -20,7 +20,7 @@ export class UserController {
 
   public create(name: string, pass: string, Rpass: string) {
     const user = new User(name, pass, Rpass);
-    userList.push(user);
-    return userList;
+    usersField.push(user);
+    return usersField;
   }
 }

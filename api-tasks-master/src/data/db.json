@@ -2,13 +2,13 @@
   "users": [
     {
       "id": "1",
-      "name": "teste1@teste.com",
-      "pass": "1234@"
+      "name": "user1@teste.com",
+      "pass": "1111"
     },
     {
       "id": "2",
-      "name": "teste2@teste.com",
-      "pass": "0987!"
+      "name": "user2@teste.com",
+      "pass": "2222"
     }
   ],
   "tasks": [
